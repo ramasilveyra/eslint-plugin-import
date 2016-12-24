@@ -1,7 +1,7 @@
 # Forbid the use of extraneous packages
 
 Forbid the import of external modules that are not declared in the `package.json`'s `dependencies`, `devDependencies`, `optionalDependencies` or `peerDependencies`.
-The closest parent `package.json` will be used. If no `package.json` is found, the rule will not lint anything.
+The closest parent `package.json` will be used. If no `package.json` is found, the rule will not lint anything. This behaviour can be changed with the rule option `packagePath`.
 
 ### Options
 
@@ -26,6 +26,12 @@ You can also use an array of globs instead of literal booleans:
 ```
 
 When using an array of globs, the setting will be activated if the name of the file being linted matches a single glob in the array.
+
+Also there is one more option called `packagePath`, this option is to specify the path of the package.json.
+
+```js
+"import/no-extraneous-dependencies": ["error", {"packagePath": './package.json'}]
+```
 
 ## Rule Details
 

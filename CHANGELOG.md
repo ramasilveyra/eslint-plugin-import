@@ -6,6 +6,7 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ## [Unreleased]
 ### Changed
 - [`no-extraneous-dependencies`]: use `read-pkg-up` to simplify finding + loading `package.json` ([#680], thanks [@wtgtybhertgeghgtwtg])
+- Add support for nested package.json [`no-extraneous-dependencies`] ([#458] + [#685], thanks [@ramasilveyra])
 
 ### Fixed
 - attempt to fix crash in [`no-mutable-exports`]. ([#660])
@@ -377,6 +378,7 @@ for info on changes for earlier releases.
 [`no-unassigned-import`]: ./docs/rules/no-unassigned-import.md
 [`unambiguous`]: ./docs/rules/unambiguous.md
 
+[#685]: https://github.com/benmosher/eslint-plugin-import/pull/685
 [#680]: https://github.com/benmosher/eslint-plugin-import/pull/680
 [#654]: https://github.com/benmosher/eslint-plugin-import/pull/654
 [#639]: https://github.com/benmosher/eslint-plugin-import/pull/639
@@ -448,6 +450,7 @@ for info on changes for earlier releases.
 [#507]: https://github.com/benmosher/eslint-plugin-import/issues/507
 [#484]: https://github.com/benmosher/eslint-plugin-import/issues/484
 [#478]: https://github.com/benmosher/eslint-plugin-import/issues/478
+[#458]: https://github.com/benmosher/eslint-plugin-import/issues/458
 [#456]: https://github.com/benmosher/eslint-plugin-import/issues/456
 [#453]: https://github.com/benmosher/eslint-plugin-import/issues/453
 [#452]: https://github.com/benmosher/eslint-plugin-import/issues/452
@@ -561,3 +564,4 @@ for info on changes for earlier releases.
 [@ntdb]: https://github.com/ntdb
 [@jakubsta]: https://github.com/jakubsta
 [@wtgtybhertgeghgtwtg]: https://github.com/wtgtybhertgeghgtwtg
+[@ramasilveyra]: https://github.com/ramasilveyra

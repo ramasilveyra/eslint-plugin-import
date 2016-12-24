@@ -1,16 +1,22 @@
 import path from 'path'
+import fs from 'fs'
 import readPkgUp from 'read-pkg-up'
 import minimatch from 'minimatch'
 import importType from '../core/importType'
 import isStaticRequire from '../core/staticRequire'
 
-function getDependencies(context) {
+function getDependencies(context, packagePath) {
   try {
-    const pkg = readPkgUp.sync({cwd: context.getFilename(), normalize: false})
-    if (!pkg || !pkg.pkg) {
+    const pkg = packagePath
+      ? JSON.parse(fs.readFileSync(packagePath, 'utf8'))
+      : readPkgUp.sync({cwd: context.getFilename(), normalize: false}).pkg
+
+    if (!pkg) {
       return null
     }
-    const packageContent = pkg.pkg
+
+    const packageContent = pkg
+
     return {
       dependencies: packageContent.dependencies || {},
       devDependencies: packageContent.devDependencies || {},
@@ -93,6 +99,7 @@ module.exports = {
           'devDependencies': { 'type': ['boolean', 'array'] },
           'optionalDependencies': { 'type': ['boolean', 'array'] },
           'peerDependencies': { 'type': ['boolean', 'array'] },
+          'packagePath': { 'type': 'string' },
         },
         'additionalProperties': false,
       },
@@ -102,7 +109,7 @@ module.exports = {
   create: function (context) {
     const options = context.options[0] || {}
     const filename = context.getFilename()
-    const deps = getDependencies(context)
+    const deps = getDependencies(context, options.packagePath)
 
     if (!deps) {
       return {}

@@ -56,6 +56,11 @@ ruleTester.run('no-extraneous-dependencies', rule, {
       filename: path.join(process.cwd(), 'foo.spec.js'),
     }),
     test({ code: 'require(6)' }),
+
+    test({
+      code: 'import "doctrine"',
+      options: [{packagePath: path.join(__dirname, '../../../package.json')}],
+    }),
   ],
   invalid: [
     test({
@@ -152,6 +157,15 @@ ruleTester.run('no-extraneous-dependencies', rule, {
       errors: [{
         ruleId: 'no-extraneous-dependencies',
         message: '\'lodash.isarray\' should be listed in the project\'s dependencies, not optionalDependencies.',
+      }],
+    }),
+
+    test({
+      code: 'import "not-a-dependency"',
+      options: [{packagePath: path.join(__dirname, '../../../package.json')}],
+      errors: [{
+        ruleId: 'no-extraneous-dependencies',
+        message: '\'not-a-dependency\' should be listed in the project\'s dependencies. Run \'npm i -S not-a-dependency\' to add it',
       }],
     }),
   ],
